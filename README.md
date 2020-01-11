@@ -22,3 +22,44 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+## usersテーブル
+|Column|Type|Options|
+|------|----|-------|
+|email|string|null: false|
+|password|string|null: false|
+|name|string|null: false|
+### Association
+- has_many :comments
+- has_many :games_users
+- has_many :games,  through:  :games_users
+
+## gamesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null: false|
+### Association
+- has_many :comments
+- has_many :games_users
+- has_many  :users,  through:  :games_users
+
+## games_usersテーブル
+|Column|Type|Options|
+|------|----|-------|
+|user_id|integer|null: false, foreign_key: true|
+|game_id|integer|null: false, foreign_key: true|
+### Association
+- belongs_to :user
+- belongs_to :game
+
+## commentsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|text|text||
+|image|text||
+|user_id|integer|null: false, foreign_key: true|
+|game_id|integer|null: false, foreign_key: true|
+|date|timestamp||
+### Association
+- belongs_to :user
+- belongs_to :game
